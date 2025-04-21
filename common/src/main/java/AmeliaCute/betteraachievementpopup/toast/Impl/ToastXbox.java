@@ -16,7 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
-public class ToastVanillaLike implements IToast 
+public class ToastXbox implements IToast 
 {
     private static final long DISPLAY_TIME = 5000L;
     private static final ResourceLocation TOAST_TEXTURE = new ResourceLocation(BetterAchievementPopup.MOD_ID, "textures/gui/xbox_background.png");
@@ -27,7 +27,7 @@ public class ToastVanillaLike implements IToast
 
     private long initTime = -1L;
 
-    public ToastVanillaLike(DisplayInfo info)
+    public ToastXbox(DisplayInfo info)
     {
         this.title        = info.getTitle().getString();
         this.description  = info.getDescription().getString();

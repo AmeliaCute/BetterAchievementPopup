@@ -14,7 +14,7 @@ public class ToastManager
 
     public static void queue(DisplayInfo info) 
     {
-        queue.add(ToastFactory.create(info, ToastFactory.Type.VANILLA_LIKE));
+        queue.add(ToastFactory.create(info, ToastFactory.Type.XBOX));
     }
 
     public static void queue(IToast toast) 
