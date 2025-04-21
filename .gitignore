@@ -1,0 +1,12 @@
+# IDE stuff
+.idea
+.vscode
+.vscode
+
+# Gradle shit
+**/*.gradle/
+
+# Compilation and run
+**/*build
+**/*bin
+**/*run

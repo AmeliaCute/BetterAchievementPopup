@@ -1,0 +1,34 @@
+modLoader = "javafml"
+loaderVersion = "[40,)"
+#issueTrackerURL = ""
+license = "Insert License Here"
+
+[[mods]]
+modId = "betterachievementpopup"
+version = "${version}"
+displayName = "BetterAchievementPopup"
+authors = "AmeliaCute"
+description = '''
+'''
+logoFile = "icon.png"
+
+[[dependencies.betterachievementpopup]]
+modId = "forge"
+mandatory = true
+versionRange = "[40,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.betterachievementpopup]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18.2,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.betterachievementpopup]]
+modId = "architectury"
+mandatory = true
+versionRange = "[4.12.94,)"
+ordering = "AFTER"
+side = "BOTH"
