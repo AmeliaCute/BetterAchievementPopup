@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import AmeliaCute.betteraachievementpopup.toast.ToastUtil;
 import AmeliaCute.betteraachievementpopup.toast.IToast;
 import net.minecraft.advancements.DisplayInfo;
+import net.minecraft.advancements.FrameType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -17,7 +18,8 @@ public class ToastModern implements IToast
 {
     private static final long DISPLAY_TIME = 5000L;
     
-    private final String title, description;
+    private final String    title, description;
+    private final Boolean   isChallenge;
     private final ItemStack icon;
 
     private long initTime = -1L;
@@ -27,6 +29,7 @@ public class ToastModern implements IToast
         this.title        = info.getTitle().getString();
         this.description  = info.getDescription().getString();
         this.icon         = info.getIcon();
+        this.isChallenge = info.getFrame() == FrameType.CHALLENGE;
     }
 
     @Override
@@ -36,7 +39,11 @@ public class ToastModern implements IToast
         {
             initTime = tick;
             minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_TOAST_IN, 1.0F, 1.0F));
-            minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F));
+            
+            if(isChallenge)
+                minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 1.0F));
+            else if(!isChallenge)
+                minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F));
         }
 
         long  elapsed       = tick - initTime;
@@ -71,15 +78,12 @@ public class ToastModern implements IToast
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1f, 1f, 1f, alphaProgress);
 
-        // background
         GuiComponent.fill(pose, centerX, centerY + yOffset, centerX + toastWidth, centerY + toastHeight + yOffset, backgroundColor);
         GuiComponent.fill(pose, centerX + 6, centerY + 6 + yOffset, centerX + 26, centerY + 26 + yOffset, itemBackgroundColor);
 
-        // icon
         minecraft.getItemRenderer().renderAndDecorateFakeItem(icon, centerX + 8, centerY + 8 + yOffset);
 
-        // text
-        minecraft.font.draw(pose, title, centerX + 30, centerY + 7 + yOffset, titleColor);
+        ToastUtil.drawText(pose, minecraft, title, centerX + 30, centerY + 7 + yOffset, scaledHeight, toastWidth - 40, tick, titleColor);
         ToastUtil.drawText(pose, minecraft, description, centerX + 30, centerY + 18 + yOffset, scaledHeight, toastWidth - 34, tick, descriptionColor);
 
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);

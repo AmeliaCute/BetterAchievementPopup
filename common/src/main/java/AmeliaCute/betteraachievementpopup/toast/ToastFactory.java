@@ -10,7 +10,8 @@ public class ToastFactory {
     public static IToast create(DisplayInfo info, Type type) {
         switch (type) {
             case MODERN: return new ToastModern(info);
-            case XBOX: return new ToastXbox(info);
+            case XBOX:   return new ToastXbox(info);
+            
             default: throw new IllegalArgumentException("Unknown toast type");
         }
     }
