@@ -93,12 +93,14 @@ public class ToastXbox implements IToast
         {
             int drawWidth = (int) (toastWidth * phaseExpand);
             int drawX = positionX + (toastWidth - drawWidth) / 2;
-            RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+            RenderSystem.setShaderColor(1f, 1f, 1f, phaseExpand);
             RenderSystem.setShaderTexture(0, TOAST_TEXTURE);
             GuiComponent.blit(pose, drawX, positionY, 0, 0, drawWidth, toastHeight, toastWidth, toastHeight);
+            
 
             RenderSystem.setShaderTexture(0, ITEM_TEXTURE);
             GuiComponent.blit(pose, drawX + 6, positionY + 6, 0, 0, 20, 20, 20, 20);
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         }
         if (phaseFade > 0) 
         {
